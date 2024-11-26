@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: campaign_manager
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && python manage.py migrate
+    startCommand: gunicorn campaign_manager.wsgi:application
+    envVars:
+      - key: DJANGO_SECRET_KEY
+        value: django-insecure-^z^0b)r4)*f@%1!6q2-2ptqthoec!iqy@ik#p4&87jx)b9x166
+      - key: DATABASE_URL
+        value: your-database-url
+      - key: DEBUG_VALUE
+        value: False
